@@ -1,2 +1,2 @@
-# Game-Dev-OS
+# game-Dev-OS
 The all-in-one operating system for indie game developers.
