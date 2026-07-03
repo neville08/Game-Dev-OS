@@ -1,3 +1,19 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  { icon: "⌂", label: "Home", href: "/preview" },
+  { icon: "▣", label: "Projects", href: "/preview/projects" },
+  { icon: "◉", label: "Playtests", href: "/preview/playtests" },
+  { icon: "✓", label: "Tasks", href: "/preview/tasks" },
+  { icon: "!", label: "Bugs", href: "/preview/bugs" },
+  { icon: "□", label: "Docs", href: "/preview/docs" },
+  { icon: "↗", label: "Publishing", href: "/preview/publishing" },
+  { icon: "✦", label: "AI Assistant", href: "/preview/ai" },
+];
+
 const activity = [
   "Neville logged Playtest #12",
   "Beacon capture bug moved to In Progress",
@@ -11,6 +27,8 @@ const stats = [
 ];
 
 export default function DashboardPreview() {
+  const pathname = usePathname();
+
   return (
     <section id="product" className="relative px-4 pb-24 md:px-8">
       <style>{`
@@ -54,26 +72,26 @@ export default function DashboardPreview() {
                 Workspace
               </p>
 
-              {[
-                ["⌂", "Home"],
-                ["▣", "Projects"],
-                ["◉", "Playtests"],
-                ["✓", "Tasks"],
-                ["!", "Bugs"],
-                ["□", "Docs"],
-              ].map(([icon, item]) => (
-                <div
-                  key={item}
-                  className={`mb-3 flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${
-                    item === "Projects"
-                      ? "bg-orange-500/15 text-orange-400"
-                      : "text-gray-400 hover:bg-orange-500/10 hover:text-orange-400"
-                  }`}
-                >
-                  <span className="w-5 text-center">{icon}</span>
-                  {item}
-                </div>
-              ))}
+              <nav className="space-y-3">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${
+                        isActive
+                          ? "bg-orange-500/15 text-orange-400"
+                          : "text-gray-400 hover:bg-orange-500/10 hover:text-orange-400"
+                      }`}
+                    >
+                      <span className="w-5 text-center">{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
             </aside>
 
             <div className="p-6 md:p-10">
@@ -97,9 +115,7 @@ export default function DashboardPreview() {
                 <div className="rounded-3xl border border-white/10 bg-[#181C22] p-7 transition duration-300 hover:-translate-y-1 hover:border-orange-500/40 hover:bg-[#20252D] hover:shadow-xl hover:shadow-orange-500/5">
                   <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                      <p className="text-sm text-gray-400">
-                        Current Milestone
-                      </p>
+                      <p className="text-sm text-gray-400">Current Milestone</p>
                       <h3 className="mt-2 text-3xl font-semibold text-white">
                         Capture System Polish
                       </h3>
