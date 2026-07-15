@@ -1,5 +1,6 @@
 import Navbar from "@/components/landing/Navbar";
 import DashboardPreview from "@/components/landing/DashboardPreview";
+import PreviewShell from "@/components/preview/PreviewShell";
 
 export default function PreviewPage() {
   return (
@@ -7,7 +8,9 @@ export default function PreviewPage() {
       <Navbar />
 
       <div className="pt-24">
-        <DashboardPreview />
+        <PreviewShell>
+          <DashboardPreview />
+        </PreviewShell>
       </div>
     </main>
   );
